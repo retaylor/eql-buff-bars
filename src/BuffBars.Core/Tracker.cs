@@ -34,8 +34,11 @@ public sealed class Tracker
 
     private readonly SpellDb _db;
     private readonly object _lock = new();
-    /// <summary>Global beneficial-duration extension in percent (AA focus approximation).</summary>
+    /// <summary>Global beneficial-duration extension in percent (Spell Casting Reinforcement AA).</summary>
     public int ExtendBeneficialPercent { get; set; }
+    /// <summary>Per-caster extension overrides (boxes with different AA ranks).</summary>
+    public IReadOnlyDictionary<string, int> ExtensionOverridesByCaster { get; set; } =
+        new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
     /// <summary>Per-spell absolute duration overrides in seconds (config-driven).</summary>
     public IReadOnlyDictionary<string, int> DurationOverridesSeconds { get; set; } =
         new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -249,9 +252,16 @@ public sealed class Tracker
         var level = _observerLevels.TryGetValue(casterDisplay, out var lvl) ? lvl : 0;
         var durSecs = spell.DurationSeconds(level);
         if (DurationOverridesSeconds.TryGetValue(spell.Name, out var overrideSecs))
+        {
             durSecs = overrideSecs;
-        else if (spell.Beneficial && ExtendBeneficialPercent > 0)
-            durSecs = (int)((long)durSecs * (100 + ExtendBeneficialPercent) / 100);
+        }
+        else if (spell.Beneficial && !spell.HasInvulnerability)   // SCR AA exempts invulnerability
+        {
+            var pct = ExtensionOverridesByCaster.TryGetValue(casterDisplay, out var o)
+                ? o
+                : ExtendBeneficialPercent;
+            if (pct > 0) durSecs = (int)((long)durSecs * (100 + pct) / 100);
+        }
         DateTime? end = durSecs >= int.MaxValue / 2 || spell.DurationFormula == 50
             ? null
             : ts.AddSeconds(durSecs);

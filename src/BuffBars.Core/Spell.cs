@@ -67,6 +67,8 @@ public sealed class Spell
     public bool HasHaste { get; init; }
     /// <summary>Damage shield (SPA 59; base is NEGATIVE in this client - damage dealt to the attacker).</summary>
     public bool HasDamageShield { get; init; }
+    /// <summary>Invulnerability (SPA 40) - exempt from AA beneficial-duration extension.</summary>
+    public bool HasInvulnerability { get; init; }
 
     /// <summary>Critical buff (HoT/regen/haste/damage shield) - pinned + tinted in the overlay,
     /// and kept out of the Quick Buffs aggregate.</summary>

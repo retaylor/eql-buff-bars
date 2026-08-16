@@ -64,6 +64,7 @@ public sealed class SpellDb
             var hasRegen = false;
             var hasHaste = false;
             var hasDs = false;
+            var hasInvuln = false;
             foreach (var slot in f[^1].Split('$'))
             {
                 var parts = slot.Split('|');
@@ -72,6 +73,7 @@ public sealed class SpellDb
                 if (spa == 0 && baseVal > 0) hasRegen = true;        // timed +HP = regen/HoT
                 if (spa == 11 && baseVal >= 100) hasHaste = true;    // melee haste
                 if (spa == 59 && baseVal != 0) hasDs = true;         // damage shield (base is NEGATIVE in this client: damage dealt to attacker)
+                if (spa == 40) hasInvuln = true;                     // invulnerability - exempt from AA duration extension
             }
 
             var spell = new Spell
@@ -92,6 +94,7 @@ public sealed class SpellDb
                 HasRegen = hasRegen,
                 HasHaste = hasHaste,
                 HasDamageShield = hasDs,
+                HasInvulnerability = hasInvuln,
             };
             spell.ComputePlayerCastable();
             db.Add(spell);

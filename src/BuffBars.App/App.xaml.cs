@@ -42,6 +42,8 @@ public partial class App : Application
         _tracker = new Tracker(db)
         {
             ExtendBeneficialPercent = _config.ExtendBeneficialPercent,
+            ExtensionOverridesByCaster = new Dictionary<string, int>(
+                _config.ExtendBeneficialPercentByCharacter, StringComparer.OrdinalIgnoreCase),
             DurationOverridesSeconds = new Dictionary<string, int>(
                 _config.DurationOverridesSeconds, StringComparer.OrdinalIgnoreCase),
         };
@@ -155,6 +157,22 @@ public partial class App : Application
         group.CheckedChanged += (_, _) => { _config.GroupQuickBuffs = group.Checked; _config.Save(); };
         var enemy = new WinForms.ToolStripMenuItem("Show enemy buffs panel") { Checked = _config.ShowEnemyBuffPanel, CheckOnClick = true };
         enemy.CheckedChanged += (_, _) => { _config.ShowEnemyBuffPanel = enemy.Checked; _config.Save(); OpenOverlays(_editMode); };
+
+        // Spell Casting Reinforcement AA: passive beneficial-duration extension, 4 ranks
+        var scr = new WinForms.ToolStripMenuItem("Buff duration AA (SCR)");
+        foreach (var (label, pct) in new[] { ("Off", 0), ("Rank I (+5%)", 5), ("Rank II (+15%)", 15), ("Rank III (+30%)", 30), ("Rank IV (+50%)", 50) })
+        {
+            var item = new WinForms.ToolStripMenuItem(label) { Checked = _config.ExtendBeneficialPercent == pct, Tag = pct };
+            item.Click += (s, _) =>
+            {
+                var chosen = (int)((WinForms.ToolStripMenuItem)s!).Tag!;
+                _config.ExtendBeneficialPercent = chosen;
+                _config.Save();
+                _tracker.ExtendBeneficialPercent = chosen;
+                foreach (WinForms.ToolStripMenuItem mi in scr.DropDownItems) mi.Checked = (int)mi.Tag! == chosen;
+            };
+            scr.DropDownItems.Add(item);
+        }
         var exit = new WinForms.ToolStripMenuItem("Exit");
         exit.Click += (_, _) => Shutdown();
         menu.Items.Add(edit);
@@ -162,6 +180,7 @@ public partial class App : Application
         menu.Items.Add(songs);
         menu.Items.Add(group);
         menu.Items.Add(enemy);
+        menu.Items.Add(scr);
         menu.Items.Add(new WinForms.ToolStripSeparator());
         menu.Items.Add(exit);
         _tray.ContextMenuStrip = menu;

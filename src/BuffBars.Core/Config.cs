@@ -31,8 +31,12 @@ public sealed class AppConfig
     public Dictionary<string, int> DurationOverridesSeconds { get; set; } = new();
     /// <summary>Collapse long package buffs (the Quick Buff AA blast) into one aggregate row.</summary>
     public bool GroupQuickBuffs { get; set; } = true;
-    /// <summary>Buffs at least this long (base) are considered part of the Quick Buff package.</summary>
-    public int QuickBuffMinDurationSeconds { get; set; } = 600;
+    /// <summary>Buffs at least this long (base) are considered part of the Quick Buff package.
+    /// 20 minutes keeps mid-length buffs visible individually - the aggregate is for the
+    /// long-term stat package.</summary>
+    public int QuickBuffMinDurationSeconds { get; set; } = 1200;
+    /// <summary>Per-character Spell Casting Reinforcement overrides, e.g. {"Doofus": 50}.</summary>
+    public Dictionary<string, int> ExtendBeneficialPercentByCharacter { get; set; } = new();
     /// <summary>Quick Buff AA cooldown on this server.</summary>
     public int QuickBuffCooldownSeconds { get; set; } = 300;
     /// <summary>Separate window for BENEFICIAL effects on enemies (dispel intel). Off by default.</summary>
