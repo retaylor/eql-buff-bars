@@ -103,7 +103,6 @@ public partial class OverlayWindow : Window
         {
             var rows = new List<(int Rank, double Remaining, RowView Row)>();
             var package = new List<double>();      // remaining seconds of grouped long buffs
-            var packageInfinite = 0;
             foreach (var t in actor.Timers)
             {
                 if (t.Spell.BaseDurationSeconds < minDurationSeconds) continue;
@@ -112,11 +111,12 @@ public partial class OverlayWindow : Window
                 var remaining = t.RemainingSeconds(now);
                 if (remaining <= 0) continue;
 
+                // permanent buffs never expire - they stay individual rows, not package members
                 if (quickBuffs is { Enabled: true } qb && !isDotPanel && !t.Spell.IsVitalBuff &&
-                    t.Spell.Beneficial && t.Spell.BaseDurationSeconds >= qb.MinDurationSeconds)
+                    t.Spell.Beneficial && !double.IsInfinity(remaining) &&
+                    t.Spell.BaseDurationSeconds >= qb.MinDurationSeconds)
                 {
-                    if (double.IsInfinity(remaining)) packageInfinite++;
-                    else package.Add(remaining);
+                    package.Add(remaining);
                     continue;
                 }
 
@@ -150,11 +150,10 @@ public partial class OverlayWindow : Window
             var ordered = rows.OrderByDescending(r => r.Rank).ThenBy(r => r.Remaining)
                               .Select(r => r.Row).ToList();
 
-            if (package.Count > 0 || packageInfinite > 0)
+            if (package.Count > 0)
             {
-                var count = package.Count + packageInfinite;
-                var minRemaining = package.Count > 0 ? package.Min() : double.PositiveInfinity;
-                var label = $"Quick Buffs ({count})";
+                var minRemaining = package.Min();
+                var label = $"Quick Buffs ({package.Count})";
                 if (actor.QuickBuffAt is { } qbAt && quickBuffs is { } qbo)
                 {
                     var cd = qbo.CooldownSeconds - (now - qbAt).TotalSeconds;
