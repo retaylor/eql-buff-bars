@@ -50,6 +50,9 @@ public sealed class Tracker
     private readonly Dictionary<string, int> _observerLevels = new(StringComparer.OrdinalIgnoreCase);
     private readonly List<RecentCast> _recentCasts = new();
     private readonly Dictionary<string, DateTime> _quickBuffAt = new();   // actor key -> last activation
+    // long-term memory: every spell an actor has been SEEN casting (disambiguates Quick Buff
+    // blasts, whose landings arrive with no cast lines - e.g. the shared regen-line text)
+    private readonly Dictionary<string, HashSet<string>> _knownSpells = new();
 
     private readonly record struct RecentCast(DateTime Ts, string CasterKey, string CasterDisplay, string SpellNameLower);
 
@@ -86,8 +89,12 @@ public sealed class Tracker
     private void HandleCast(CastStartEvent c)
     {
         var display = c.IsSelf ? c.Observer : c.Caster;
+        var key = Names.Key(display);
+        var nameLower = c.SpellName.ToLowerInvariant();
         PruneRecentCasts(c.Ts);
-        _recentCasts.Add(new RecentCast(c.Ts, Names.Key(display), display, c.SpellName.ToLowerInvariant()));
+        _recentCasts.Add(new RecentCast(c.Ts, key, display, nameLower));
+        if (!_knownSpells.TryGetValue(key, out var known)) _knownSpells[key] = known = new HashSet<string>();
+        known.Add(nameLower);
     }
 
     private void RemoveRecentCast(string caster, string spellName, string observer)
@@ -178,8 +185,29 @@ public sealed class Tracker
         {
             _charBuffs[(targetKey, spell.Id)] = NewInstance(h.Target, spell, caster, h.Ts, h.Observer);
         }
+        ReconcileLandingFamily(targetKey, spell);
         RememberDisplay(h.Target);
     }
+
+    /// <summary>
+    /// A tick line names its spell EXACTLY, unlike landing emotes which are shared across a
+    /// spell line ("You begin to regenerate." = Regeneration/Chloroplast/Pack variants).
+    /// When the exact spell is known, evict same-family instances the ambiguous landing
+    /// resolver may have guessed wrong (the Pack Regeneration phantom).
+    /// </summary>
+    private void ReconcileLandingFamily(string targetKey, Spell known)
+    {
+        if (known.LandsOnYou.Length == 0 && known.LandsOnOther.Length == 0) return;
+        foreach (var kv in _charBuffs.Where(kv =>
+                     kv.Key.Target == targetKey &&
+                     kv.Key.SpellId != known.Id &&
+                     SameLandingFamily(kv.Value.Spell, known)).ToList())
+            _charBuffs.Remove(kv.Key);
+    }
+
+    private static bool SameLandingFamily(Spell a, Spell b) =>
+        (a.LandsOnYou.Length > 0 && a.LandsOnYou == b.LandsOnYou) ||
+        (a.LandsOnOther.Length > 0 && a.LandsOnOther == b.LandsOnOther);
 
     private void HandleDeath(DeathEvent d)
     {
@@ -226,6 +254,21 @@ public sealed class Tracker
                     return (s, rc.CasterDisplay);
             }
         }
+
+        // Quick Buff blasts land without cast lines: prefer the candidate the recent
+        // ACTIVATOR has been seen casting at any point (their spell set)
+        var qbCutoff = ts.AddSeconds(-RecentCastWindowSeconds);
+        foreach (var (actorKey, at) in _quickBuffAt)
+        {
+            if (at < qbCutoff || at > ts) continue;
+            if (!_knownSpells.TryGetValue(actorKey, out var known)) continue;
+            foreach (var s in candidates)
+            {
+                if (known.Contains(s.Name.ToLowerInvariant()))
+                    return (s, _displayNames.GetValueOrDefault(actorKey, ""));
+            }
+        }
+
         if (candidates.Count == 1) return (candidates[0], "");
         var best = candidates.FirstOrDefault(s => s.PlayerCastable && s.DurationTicks > 0)
                    ?? candidates.FirstOrDefault(s => s.DurationTicks > 0);
@@ -237,6 +280,7 @@ public sealed class Tracker
         var targetKey = Names.Key(targetDisplay);
         var inst = NewInstance(targetDisplay, spell, casterDisplay, e.Ts, e.Observer);
         _charBuffs[(targetKey, spell.Id)] = inst;      // recast = refresh/replace
+        ReconcileLandingFamily(targetKey, spell);      // evict mis-resolved same-family cousins
         RememberDisplay(targetDisplay);
     }
 

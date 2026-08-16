@@ -70,7 +70,9 @@ public sealed class SpellDb
                 var parts = slot.Split('|');
                 if (parts.Length < 3) continue;
                 if (!int.TryParse(parts[1], out var spa) || !int.TryParse(parts[2], out var baseVal)) continue;
-                if (spa == 0 && baseVal > 0) hasRegen = true;        // timed +HP = regen/HoT
+                var maxVal = parts.Length > 5 && int.TryParse(parts[5], out var mv) ? mv : 0;
+                // timed +HP = regen/HoT; some regens are level-scaled with base=0 but max>0 (Pack Regeneration)
+                if (spa == 0 && baseVal >= 0 && (baseVal > 0 || maxVal > 0)) hasRegen = true;
                 if (spa == 11 && baseVal >= 100) hasHaste = true;    // melee haste
                 if (spa == 59 && baseVal != 0) hasDs = true;         // damage shield (base is NEGATIVE in this client: damage dealt to attacker)
                 if (spa == 40) hasInvuln = true;                     // invulnerability - exempt from AA duration extension

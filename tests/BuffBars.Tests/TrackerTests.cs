@@ -158,6 +158,59 @@ public class TrackerTests
     }
 
     [Fact]
+    public void Quick_buff_blast_resolves_regen_family_via_known_spells()
+    {
+        var db = Db(); if (db is null) return;
+        // the whole regen line shares "You begin to regenerate." - ids 137/138/144/145
+        var candidates = db.GetByLandsOnYou("You begin to regenerate.");
+        if (candidates.Count < 2) return;
+        var t = new Tracker(db);
+
+        // long ago: Doofus visibly cast Chloroplast once (teaches the spell set)
+        t.OnEvent(new CastStartEvent("", "Chloroplast", true) { Ts = T0.AddMinutes(-30), Observer = "Doofus" });
+        // now: Quick Buff blast - no cast lines, just the ambiguous landing
+        t.OnEvent(new ActivateEvent("", "Quick Buff", true) { Ts = T0, Observer = "Doofus" });
+        t.OnEvent(new LandSelfEvent(candidates) { Ts = T0.AddSeconds(2), Observer = "Doofus" });
+
+        var doofus = t.GetSnapshot(T0.AddSeconds(3)).Characters.Single(a => a.Display == "Doofus");
+        var buff = Assert.Single(doofus.Timers);
+        Assert.Equal("Chloroplast", buff.Spell.Name);   // NOT the lowest-id Pack Regeneration
+    }
+
+    [Fact]
+    public void Resolved_landing_evicts_same_family_phantom()
+    {
+        var db = Db(); if (db is null) return;
+        var packRegen = db.GetById(137);
+        var chloro = db.GetById(145);
+        if (packRegen is null || chloro is null) return;
+        var t = new Tracker(db);
+
+        // phantom from an earlier bad guess
+        t.OnEvent(new LandSelfEvent(new[] { packRegen }) { Ts = T0, Observer = "Doofus" });
+        // later, a confidently-resolved re-land of the same family
+        t.OnEvent(new CastStartEvent("", "Chloroplast", true) { Ts = T0.AddSeconds(60), Observer = "Doofus" });
+        t.OnEvent(new LandSelfEvent(db.GetByLandsOnYou(chloro.LandsOnYou)) { Ts = T0.AddSeconds(63), Observer = "Doofus" });
+
+        var doofus = t.GetSnapshot(T0.AddSeconds(64)).Characters.Single(a => a.Display == "Doofus");
+        var buff = Assert.Single(doofus.Timers);
+        Assert.Equal("Chloroplast", buff.Spell.Name);   // phantom evicted, one instance remains
+    }
+
+    [Fact]
+    public void Level_scaled_regens_classify_as_vital()
+    {
+        var db = Db(); if (db is null) return;
+        // Pack Regeneration: SPA 0 with base=0 max=9 (level-scaled) - must still be regen
+        var packRegen = db.GetById(137);
+        if (packRegen is not null)
+        {
+            Assert.True(packRegen.HasRegen, "level-scaled regen (base=0, max>0) not classified");
+            Assert.True(packRegen.IsVitalBuff);
+        }
+    }
+
+    [Fact]
     public void Full_fixture_replay_produces_state_without_errors()
     {
         var db = Db(); if (db is null) return;
