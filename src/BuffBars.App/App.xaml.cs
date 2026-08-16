@@ -173,6 +173,8 @@ public partial class App : Application
             };
             scr.DropDownItems.Add(item);
         }
+        var clear = new WinForms.ToolStripMenuItem("Clear tracked buffs && DoTs");
+        clear.Click += (_, _) => _tracker.ClearAll();
         var exit = new WinForms.ToolStripMenuItem("Exit");
         exit.Click += (_, _) => Shutdown();
         menu.Items.Add(edit);
@@ -182,6 +184,7 @@ public partial class App : Application
         menu.Items.Add(enemy);
         menu.Items.Add(scr);
         menu.Items.Add(new WinForms.ToolStripSeparator());
+        menu.Items.Add(clear);
         menu.Items.Add(exit);
         _tray.ContextMenuStrip = menu;
     }

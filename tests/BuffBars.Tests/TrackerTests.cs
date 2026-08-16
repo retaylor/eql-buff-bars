@@ -211,6 +211,61 @@ public class TrackerTests
     }
 
     [Fact]
+    public void Own_group_change_sweeps_strangers_but_keeps_observer_buffs()
+    {
+        var db = Db(); if (db is null) return;
+        var t = new Tracker(db);
+        // observer buffs self; a nearby stranger also gets observed
+        t.OnEvent(new CastStartEvent("", "Spirit of Wolf", true) { Ts = T0, Observer = "Doofus" });
+        t.OnEvent(new LandSelfEvent(db.GetByLandsOnYou("You feel the spirit of wolf enter you."))
+            { Ts = T0.AddSeconds(1), Observer = "Doofus" });
+        t.OnEvent(new LandOtherEvent("Strangerdude", db.MatchLandsOnOther("Strangerdude is surrounded by a brief lupine aura.")!.Value.Candidates)
+            { Ts = T0.AddSeconds(2), Observer = "Doofus" });
+        Assert.Equal(2, t.GetSnapshot(T0.AddSeconds(3)).Characters.Count);
+
+        // we change groups -> the stranger is swept, our own buffs stay
+        t.OnEvent(new GroupEvent("", Joined: true, IsSelf: true) { Ts = T0.AddSeconds(10), Observer = "Doofus" });
+        var snap = t.GetSnapshot(T0.AddSeconds(11));
+        var only = Assert.Single(snap.Characters);
+        Assert.Equal("Doofus", only.Display);
+    }
+
+    [Fact]
+    public void Member_leaving_group_drops_their_panel()
+    {
+        var db = Db(); if (db is null) return;
+        var t = new Tracker(db);
+        t.OnEvent(new LandOtherEvent("Nuddle", db.MatchLandsOnOther("Nuddle is surrounded by a brief lupine aura.")!.Value.Candidates)
+            { Ts = T0, Observer = "Doofus" });
+        Assert.Single(t.GetSnapshot(T0.AddSeconds(1)).Characters);
+
+        t.OnEvent(new GroupEvent("Nuddle", Joined: false, IsSelf: false) { Ts = T0.AddSeconds(5), Observer = "Doofus" });
+        Assert.Empty(t.GetSnapshot(T0.AddSeconds(6)).Characters);
+    }
+
+    [Fact]
+    public void Clear_all_wipes_panels_but_keeps_learned_spell_sets()
+    {
+        var db = Db(); if (db is null) return;
+        var candidates = db.GetByLandsOnYou("You begin to regenerate.");
+        if (candidates.Count < 2) return;
+        var t = new Tracker(db);
+        t.OnEvent(new CastStartEvent("", "Chloroplast", true) { Ts = T0.AddMinutes(-30), Observer = "Doofus" });
+        t.OnEvent(new DotTickEvent("a rock golem", 10, "Scourge", "", false) { Ts = T0, Observer = "Doofus" });
+
+        t.ClearAll();
+        var snap = t.GetSnapshot(T0.AddSeconds(1));
+        Assert.Empty(snap.Characters);
+        Assert.Empty(snap.Mobs);
+
+        // learned spell set survives: a Quick Buff blast still resolves the regen family
+        t.OnEvent(new ActivateEvent("", "Quick Buff", true) { Ts = T0.AddSeconds(10), Observer = "Doofus" });
+        t.OnEvent(new LandSelfEvent(candidates) { Ts = T0.AddSeconds(12), Observer = "Doofus" });
+        var buff = Assert.Single(t.GetSnapshot(T0.AddSeconds(13)).Characters.Single().Timers);
+        Assert.Equal("Chloroplast", buff.Spell.Name);
+    }
+
+    [Fact]
     public void Full_fixture_replay_produces_state_without_errors()
     {
         var db = Db(); if (db is null) return;

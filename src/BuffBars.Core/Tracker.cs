@@ -50,6 +50,7 @@ public sealed class Tracker
     private readonly Dictionary<string, int> _observerLevels = new(StringComparer.OrdinalIgnoreCase);
     private readonly List<RecentCast> _recentCasts = new();
     private readonly Dictionary<string, DateTime> _quickBuffAt = new();   // actor key -> last activation
+    private readonly HashSet<string> _observers = new();                  // keys of our own log characters
     // long-term memory: every spell an actor has been SEEN casting (disambiguates Quick Buff
     // blasts, whose landings arrive with no cast lines - e.g. the shared regen-line text)
     private readonly Dictionary<string, HashSet<string>> _knownSpells = new();
@@ -62,6 +63,7 @@ public sealed class Tracker
     {
         lock (_lock)
         {
+            if (e.Observer.Length > 0) _observers.Add(Names.Key(e.Observer));
             switch (e)
             {
                 case CastStartEvent c: HandleCast(c); break;
@@ -77,6 +79,7 @@ public sealed class Tracker
                 case DeathEvent d: HandleDeath(d); break;
                 case ZoneEvent z: HandleZone(z); break;
                 case LevelEvent lv: _observerLevels[lv.Observer] = lv.Level; break;
+                case GroupEvent g: HandleGroup(g); break;
                 case ActivateEvent a when a.AbilityName.Equals("Quick Buff", StringComparison.OrdinalIgnoreCase):
                     _quickBuffAt[Names.Key(a.IsSelf ? a.Observer : a.Actor)] = a.Ts;
                     break;
@@ -222,6 +225,41 @@ public sealed class Tracker
             _charBuffs.Remove(kv.Key);
         foreach (var kv in _mobTimers.Where(kv => kv.Key.Caster == victimKey).ToList())
             _mobTimers.Remove(kv.Key);
+    }
+
+    private void HandleGroup(GroupEvent g)
+    {
+        // every log character we tail is an "observer" - their own buffs are always real
+        _observers.Add(Names.Key(g.Observer));
+        if (g.IsSelf)
+        {
+            // our own group changed (joined new / left / removed): stale strangers and old
+            // groupmates no longer belong on the panel; our own characters' buffs persist
+            foreach (var kv in _charBuffs.Where(kv => !_observers.Contains(kv.Key.Target)).ToList())
+                _charBuffs.Remove(kv.Key);
+        }
+        else if (!g.Joined && g.Name.Length > 0)
+        {
+            // a named member left: drop their panel right away
+            var key = Names.Key(g.Name);
+            if (!_observers.Contains(key))
+            {
+                foreach (var kv in _charBuffs.Where(kv => kv.Key.Target == key).ToList())
+                    _charBuffs.Remove(kv.Key);
+            }
+        }
+    }
+
+    /// <summary>Manual wipe: all buff and DoT panels. Learned spell sets, levels and Quick
+    /// Buff cooldowns are kept - they stay true regardless of who is nearby.</summary>
+    public void ClearAll()
+    {
+        lock (_lock)
+        {
+            _charBuffs.Clear();
+            _mobTimers.Clear();
+            _recentCasts.Clear();
+        }
     }
 
     private void HandleZone(ZoneEvent z)
