@@ -1,12 +1,12 @@
 # EQL Buff Bars
 
-A buff and DoT timer overlay for **EverQuest Legends**. It reads the log files the game already writes to disk, works out which spells landed on whom, and floats small always-on-top panels over your game showing live countdown bars for every buff on your party and every DoT on your targets. If you box multiple characters, it watches all of their logs at once and shows each character's buffs side by side. It never touches the game process itself - no memory reading, no injection, no network traffic.
+A buff and DoT timer overlay for **EverQuest Legends**. It reads the log file the game already writes to disk, works out which spells landed on whom, and floats small always-on-top panels over your game showing live countdown bars for buffs across your **party and raid** and DoTs/debuffs on the mobs you fight. Your character's log records every nearby spell cast and every landing message - that alone is enough to reconstruct who has what, so groupmates on their own computers show up without any setup on their end. It never touches the game process itself - no memory reading, no injection, no network traffic.
 
 ![Party buff overlay](docs/screenshot-party-buffs.png)
 
 ## Features
 
-- **Party buff timers across all your characters.** Every character with logging turned on gets a panel automatically - start logging on a new box mid-session and it appears within a few seconds. Buffs are sorted soonest-to-expire first, with bars turning amber under a minute and red under twenty seconds.
+- **Party and raid buff timers.** Every party member your character observes gets a panel - buffs land on them in your log via cast and landing messages, and wear-off/death/zone events correct the timers. Alts you play from this computer are picked up automatically whenever their log file appears. Buffs are sorted soonest-to-expire first, with bars turning amber under a minute and red under twenty seconds.
 - **Debuff alarms.** A detrimental effect on a party member (a DoT, a snare, a malo) is the most actionable thing the overlay can show you, so it gets a bright red row sorted to the very top of that character's panel.
 - **Vital buffs pinned.** Heal-over-time, regen, haste, and damage shield effects are detected from the client's own spell data (not a hand-maintained list), pinned above ordinary buffs, and tinted cyan so a dropped haste or HoT is impossible to miss.
 - **Quick Buffs aggregate row.** The long-duration buff package from the Quick Buff AA can be dozens of individual icons. By default they collapse into a single row: `Quick Buffs (14) - cd 3:40` - showing how many are up, when the first one expires, and a live countdown on the AA cooldown itself.
@@ -19,7 +19,7 @@ A buff and DoT timer overlay for **EverQuest Legends**. It reads the log files t
 
 - Windows 10 or 11, 64-bit.
 - EverQuest Legends installed.
-- **Logging turned on** for each character you want tracked: type `/log on` in game. This setting persists per character, so you only do it once per character.
+- **Logging turned on**: type `/log on` in game. The setting persists per character, so do it once on each character you play from this computer - party members are tracked through *your* log, they don't need anything.
 - The game running in **Windowed** or **Borderless** display mode. Exclusive fullscreen bypasses the Windows compositor and hides *all* overlay applications, not just this one.
 - One of:
   - the self-contained release `EqlBuffBars.exe` (nothing else needed), or
@@ -28,7 +28,7 @@ A buff and DoT timer overlay for **EverQuest Legends**. It reads the log files t
 ## Quick start
 
 1. Get the app: download a release `EqlBuffBars.exe`, or build it yourself (see [Building from source](#building-from-source)).
-2. Make sure you have typed `/log on` on each character at least once.
+2. Make sure you have typed `/log on` on your character at least once.
 3. Run `EqlBuffBars.exe`. It loads the game's spell database, attaches to every log file in the game's `Logs` folder, and replays the last 90 minutes of log history so buffs you cast before starting the app still show up with correct remaining times.
 4. Panels appear once there is something to show - cast a buff and watch the bar appear.
 
