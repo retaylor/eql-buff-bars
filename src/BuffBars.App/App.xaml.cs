@@ -17,6 +17,7 @@ public partial class App : Application
     private OverlayWindow? _buffWindow;
     private OverlayWindow? _dotWindow;
     private OverlayWindow? _enemyBuffWindow;
+    private OverlayWindow? _ccWindow;
     private DispatcherTimer? _renderTimer;
     private int _topmostCounter;
     private bool _editMode;
@@ -96,9 +97,10 @@ public partial class App : Application
         _buffWindow?.Render(snap.Characters, now, _config.MinDurationSeconds, isDotPanel: false,
             hideBardSongs: !_config.ShowBardSongs, quickBuffs: qb);
         _dotWindow?.Render(snap.Mobs, now, _config.MinDurationSeconds, isDotPanel: true,
-            beneficialFilter: false);
+            beneficialFilter: false, hideCc: _config.ShowCcPanel && _config.HideCcFromDotPanel);
         _enemyBuffWindow?.Render(snap.Mobs, now, _config.MinDurationSeconds, isDotPanel: true,
             beneficialFilter: true, barBaseOverride: OverlayWindow.EmeraldBrush);
+        _ccWindow?.RenderCcFlat(snap.Mobs, now);
 
         if (!_editMode && ++_topmostCounter >= 8)      // every ~2s
         {
@@ -114,6 +116,7 @@ public partial class App : Application
         _buffWindow?.Close();
         _dotWindow?.Close();
         _enemyBuffWindow?.Close();
+        _ccWindow?.Close();
 
         _buffWindow = new OverlayWindow("Party Buffs", _config.BuffWindow, _config.Opacity, editMode, OnEditSaved);
         _buffWindow.Show();
@@ -128,6 +131,12 @@ public partial class App : Application
         {
             _enemyBuffWindow = new OverlayWindow("Enemy Buffs", _config.EnemyBuffWindow, _config.Opacity, editMode, OnEditSaved);
             _enemyBuffWindow.Show();
+        }
+        _ccWindow = null;
+        if (_config.ShowCcPanel)
+        {
+            _ccWindow = new OverlayWindow("Crowd Control", _config.CcWindow, _config.Opacity, editMode, OnEditSaved);
+            _ccWindow.Show();
         }
     }
 
@@ -157,6 +166,8 @@ public partial class App : Application
         group.CheckedChanged += (_, _) => { _config.GroupQuickBuffs = group.Checked; _config.Save(); };
         var enemy = new WinForms.ToolStripMenuItem("Show enemy buffs panel") { Checked = _config.ShowEnemyBuffPanel, CheckOnClick = true };
         enemy.CheckedChanged += (_, _) => { _config.ShowEnemyBuffPanel = enemy.Checked; _config.Save(); OpenOverlays(_editMode); };
+        var cc = new WinForms.ToolStripMenuItem("Show CC panel") { Checked = _config.ShowCcPanel, CheckOnClick = true };
+        cc.CheckedChanged += (_, _) => { _config.ShowCcPanel = cc.Checked; _config.Save(); OpenOverlays(_editMode); };
 
         // Spell Casting Reinforcement AA: passive beneficial-duration extension, 4 ranks
         var scr = new WinForms.ToolStripMenuItem("Buff duration AA (SCR)");
@@ -182,6 +193,7 @@ public partial class App : Application
         menu.Items.Add(songs);
         menu.Items.Add(group);
         menu.Items.Add(enemy);
+        menu.Items.Add(cc);
         menu.Items.Add(scr);
         menu.Items.Add(new WinForms.ToolStripSeparator());
         menu.Items.Add(clear);

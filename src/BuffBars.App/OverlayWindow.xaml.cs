@@ -32,6 +32,7 @@ public partial class OverlayWindow : Window
     private static readonly Brush VioletBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x93, 0x33, 0xEA)));
     private static readonly Brush CyanBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x0E, 0xA5, 0xC4)));
     public static readonly Brush EmeraldBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x05, 0x96, 0x69)));
+    private static readonly Brush FuchsiaBrush = Freeze(new SolidColorBrush(Color.FromRgb(0xD9, 0x46, 0xEF)));
     private static readonly Brush SlateBrush = Freeze(new SolidColorBrush(Color.FromRgb(0x8A, 0x93, 0xA6)));
     private static readonly Brush InkBrush = Freeze(new SolidColorBrush(Color.FromRgb(0xC7, 0xCB, 0xD6)));
     public static readonly Brush InkBrushShared = InkBrush;
@@ -96,7 +97,7 @@ public partial class OverlayWindow : Window
     /// </summary>
     public void Render(IReadOnlyList<ActorView> actors, DateTime now, int minDurationSeconds, bool isDotPanel,
         bool hideBardSongs = false, QuickBuffOptions? quickBuffs = null, bool? beneficialFilter = null,
-        Brush? barBaseOverride = null)
+        Brush? barBaseOverride = null, bool hideCc = false)
     {
         var panels = new List<PanelView>();
         foreach (var actor in actors)
@@ -108,6 +109,7 @@ public partial class OverlayWindow : Window
                 if (t.Spell.BaseDurationSeconds < minDurationSeconds) continue;
                 if (hideBardSongs && t.Spell.IsBardSong) continue;
                 if (beneficialFilter is { } bf && t.Spell.Beneficial != bf) continue;
+                if (hideCc && t.Spell.IsCc) continue;
                 var remaining = t.RemainingSeconds(now);
                 if (remaining <= 0) continue;
 
@@ -182,6 +184,47 @@ public partial class OverlayWindow : Window
                 panels.Add(new PanelView { Display = actor.Display, Rows = ordered });
         }
         Panels.ItemsSource = panels;
+    }
+
+    /// <summary>
+    /// Flat crowd-control view: every CC timer on every mob in one soonest-break-first list -
+    /// the re-mez rotation, in order. Tighter urgency thresholds than buffs (30s/10s).
+    /// </summary>
+    public void RenderCcFlat(IReadOnlyList<ActorView> mobs, DateTime now)
+    {
+        var rows = new List<(double Remaining, RowView Row)>();
+        foreach (var actor in mobs)
+        {
+            foreach (var t in actor.Timers)
+            {
+                if (!t.Spell.IsCc) continue;
+                var remaining = t.RemainingSeconds(now);
+                if (remaining <= 0 || double.IsInfinity(remaining)) continue;
+                var total = Math.Max(1, (t.End - t.Start)?.TotalSeconds ?? 1);
+                var frac = Math.Clamp(remaining / total, 0, 1);
+                var kindBrush = t.Spell.HasMez ? VioletBrush
+                    : t.Spell.HasCharm ? FuchsiaBrush
+                    : t.Spell.HasRoot ? AmberBrush
+                    : EmeraldBrush;
+                var (tb, bb) = remaining switch
+                {
+                    < 10 => (RedBrush, RedBrush),
+                    < 30 => (AmberBrush, AmberBrush),
+                    _ => (InkBrush, kindBrush),
+                };
+                rows.Add((remaining, new RowView
+                {
+                    Label = $"{t.Spell.Name} - {actor.Display}",
+                    TimeText = FormatTime(remaining),
+                    TimeBrush = tb,
+                    BarBrush = bb,
+                    BarWidth = Math.Max(2, frac * Math.Max(40, Width - 30)),
+                }));
+            }
+        }
+        Panels.ItemsSource = rows.Count == 0
+            ? new List<PanelView>()
+            : new List<PanelView> { new() { Display = "", Rows = rows.OrderBy(r => r.Remaining).Select(r => r.Row).ToList() } };
     }
 
     private static string FormatTime(double seconds)

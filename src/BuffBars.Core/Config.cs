@@ -42,6 +42,12 @@ public sealed class AppConfig
     /// <summary>Separate window for BENEFICIAL effects on enemies (dispel intel). Off by default.</summary>
     public bool ShowEnemyBuffPanel { get; set; } = false;
     public OverlayRect EnemyBuffWindow { get; set; } = new() { Left = 1860, Top = 210, Height = 360 };
+    /// <summary>Dedicated crowd-control panel: mez/charm/root/fear timers on mobs, flat,
+    /// soonest-break-first. The crowd-control view a chanter actually plays from.</summary>
+    public bool ShowCcPanel { get; set; } = true;
+    public OverlayRect CcWindow { get; set; } = new() { Left = 1115, Top = 60, Width = 330, Height = 230 };
+    /// <summary>CC timers get their own panel; keep them out of the DoT panel to avoid double rows.</summary>
+    public bool HideCcFromDotPanel { get; set; } = true;
     public OverlayRect BuffWindow { get; set; } = new() { Left = 2205, Top = 210 };
     public OverlayRect DotWindow { get; set; } = new() { Left = 2205, Top = 710, Height = 360 };
 
