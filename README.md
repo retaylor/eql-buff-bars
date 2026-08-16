@@ -1,8 +1,8 @@
-# EQL Buff Bars
+﻿# EQL Buff Bars
 
 A buff and DoT timer overlay for **EverQuest Legends**. It reads the log file the game already writes to disk, works out which spells landed on whom, and floats small always-on-top panels over your game showing live countdown bars for buffs across your **party and raid** and DoTs/debuffs on the mobs you fight. Your character's log records every nearby spell cast and every landing message - that alone is enough to reconstruct who has what, so groupmates on their own computers show up without any setup on their end. It never touches the game process itself - no memory reading, no injection, no network traffic.
 
-![Party buff overlay](docs/screenshot-party-buffs.png)
+![Party buff overlay](docs/screenshot-overlays.png)
 
 ## Features
 
