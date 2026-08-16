@@ -45,10 +45,13 @@ public partial class OverlayWindow : Window
     private readonly Action? _onSave;
     private bool _clickThroughApplied;
 
-    public OverlayWindow(string title, OverlayRect rect, double opacity, bool editMode, Action? onSave = null)
+    public OverlayWindow(string title, OverlayRect rect, double opacity, bool editMode, Action? onSave = null,
+        bool compact = false)
     {
         InitializeComponent();
         TitleText.Text = title;
+        if (compact)
+            RootBorder.LayoutTransform = new ScaleTransform(0.85, 0.85);
         _rect = rect;
         _editMode = editMode;
         _onSave = onSave;

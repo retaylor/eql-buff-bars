@@ -91,7 +91,8 @@ public partial class App : Application
         var qb = new OverlayWindow.QuickBuffOptions
         {
             Enabled = _config.GroupQuickBuffs,
-            MinDurationSeconds = _config.QuickBuffMinDurationSeconds,
+            // compact raid mode folds every non-vital beneficial buff into the aggregate
+            MinDurationSeconds = _config.CompactRaidMode ? 1 : _config.QuickBuffMinDurationSeconds,
             CooldownSeconds = _config.QuickBuffCooldownSeconds,
         };
         _buffWindow?.Render(snap.Characters, now, _config.MinDurationSeconds, isDotPanel: false,
@@ -118,24 +119,25 @@ public partial class App : Application
         _enemyBuffWindow?.Close();
         _ccWindow?.Close();
 
-        _buffWindow = new OverlayWindow("Party Buffs", _config.BuffWindow, _config.Opacity, editMode, OnEditSaved);
+        var compact = _config.CompactRaidMode;
+        _buffWindow = new OverlayWindow("Party Buffs", _config.BuffWindow, _config.Opacity, editMode, OnEditSaved, compact);
         _buffWindow.Show();
         _dotWindow = null;
         if (_config.ShowDotPanel)
         {
-            _dotWindow = new OverlayWindow("DoTs / Debuffs", _config.DotWindow, _config.Opacity, editMode, OnEditSaved);
+            _dotWindow = new OverlayWindow("DoTs / Debuffs", _config.DotWindow, _config.Opacity, editMode, OnEditSaved, compact);
             _dotWindow.Show();
         }
         _enemyBuffWindow = null;
         if (_config.ShowEnemyBuffPanel)
         {
-            _enemyBuffWindow = new OverlayWindow("Enemy Buffs", _config.EnemyBuffWindow, _config.Opacity, editMode, OnEditSaved);
+            _enemyBuffWindow = new OverlayWindow("Enemy Buffs", _config.EnemyBuffWindow, _config.Opacity, editMode, OnEditSaved, compact);
             _enemyBuffWindow.Show();
         }
         _ccWindow = null;
         if (_config.ShowCcPanel)
         {
-            _ccWindow = new OverlayWindow("Crowd Control", _config.CcWindow, _config.Opacity, editMode, OnEditSaved);
+            _ccWindow = new OverlayWindow("Crowd Control", _config.CcWindow, _config.Opacity, editMode, OnEditSaved, compact);
             _ccWindow.Show();
         }
     }
@@ -168,6 +170,8 @@ public partial class App : Application
         enemy.CheckedChanged += (_, _) => { _config.ShowEnemyBuffPanel = enemy.Checked; _config.Save(); OpenOverlays(_editMode); };
         var cc = new WinForms.ToolStripMenuItem("Show CC panel") { Checked = _config.ShowCcPanel, CheckOnClick = true };
         cc.CheckedChanged += (_, _) => { _config.ShowCcPanel = cc.Checked; _config.Save(); OpenOverlays(_editMode); };
+        var compactMode = new WinForms.ToolStripMenuItem("Compact raid mode") { Checked = _config.CompactRaidMode, CheckOnClick = true };
+        compactMode.CheckedChanged += (_, _) => { _config.CompactRaidMode = compactMode.Checked; _config.Save(); OpenOverlays(_editMode); };
 
         // Spell Casting Reinforcement AA: passive beneficial-duration extension, 4 ranks
         var scr = new WinForms.ToolStripMenuItem("Buff duration AA (SCR)");
@@ -194,6 +198,7 @@ public partial class App : Application
         menu.Items.Add(group);
         menu.Items.Add(enemy);
         menu.Items.Add(cc);
+        menu.Items.Add(compactMode);
         menu.Items.Add(scr);
         menu.Items.Add(new WinForms.ToolStripSeparator());
         menu.Items.Add(clear);

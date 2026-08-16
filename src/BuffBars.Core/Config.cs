@@ -48,6 +48,9 @@ public sealed class AppConfig
     public OverlayRect CcWindow { get; set; } = new() { Left = 1115, Top = 60, Width = 330, Height = 230 };
     /// <summary>CC timers get their own panel; keep them out of the DoT panel to avoid double rows.</summary>
     public bool HideCcFromDotPanel { get; set; } = true;
+    /// <summary>Raid density: scale panels down ~15% and fold ALL non-vital beneficial buffs
+    /// into the Quick Buffs aggregate regardless of duration.</summary>
+    public bool CompactRaidMode { get; set; } = false;
     public OverlayRect BuffWindow { get; set; } = new() { Left = 2205, Top = 210 };
     public OverlayRect DotWindow { get; set; } = new() { Left = 2205, Top = 710, Height = 360 };
 
