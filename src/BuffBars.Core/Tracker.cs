@@ -80,6 +80,7 @@ public sealed class Tracker
                 case ZoneEvent z: HandleZone(z); break;
                 case LevelEvent lv: _observerLevels[lv.Observer] = lv.Level; break;
                 case GroupEvent g: HandleGroup(g); break;
+                case MezBreakEvent mb: HandleMezBreak(mb); break;
                 case ActivateEvent a when a.AbilityName.Equals("Quick Buff", StringComparison.OrdinalIgnoreCase):
                     _quickBuffAt[Names.Key(a.IsSelf ? a.Observer : a.Actor)] = a.Ts;
                     break;
@@ -224,6 +225,16 @@ public sealed class Tracker
                      kv.Value.CasterKey == victimKey && !kv.Value.Spell.Beneficial).ToList())
             _charBuffs.Remove(kv.Key);
         foreach (var kv in _mobTimers.Where(kv => kv.Key.Caster == victimKey).ToList())
+            _mobTimers.Remove(kv.Key);
+    }
+
+    private void HandleMezBreak(MezBreakEvent mb)
+    {
+        // "X has been awakened by Y." - the mez on X broke early (fires for mobs and PCs)
+        var key = Names.Key(mb.Target);
+        foreach (var kv in _charBuffs.Where(kv => kv.Key.Target == key && kv.Value.Spell.HasMez).ToList())
+            _charBuffs.Remove(kv.Key);
+        foreach (var kv in _mobTimers.Where(kv => kv.Key.Target == key && kv.Value.Spell.HasMez).ToList())
             _mobTimers.Remove(kv.Key);
     }
 

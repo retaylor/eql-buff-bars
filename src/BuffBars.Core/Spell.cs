@@ -70,6 +70,15 @@ public sealed class Spell
     /// <summary>Invulnerability (SPA 40) - exempt from AA beneficial-duration extension.</summary>
     public bool HasInvulnerability { get; init; }
 
+    /// <summary>Crowd-control flags (SPA ids verified vs this client: 31/22/99/23).</summary>
+    public bool HasMez { get; init; }
+    public bool HasCharm { get; init; }
+    public bool HasRoot { get; init; }
+    public bool HasFear { get; init; }
+
+    /// <summary>Timed detrimental crowd control - surfaces on the CC panel.</summary>
+    public bool IsCc => !Beneficial && DurationTicks > 0 && (HasMez || HasCharm || HasRoot || HasFear);
+
     /// <summary>Critical buff (HoT/regen/haste/damage shield) - pinned + tinted in the overlay,
     /// and kept out of the Quick Buffs aggregate.</summary>
     public bool IsVitalBuff => Beneficial && DurationTicks > 0 && (HasRegen || HasHaste || HasDamageShield);

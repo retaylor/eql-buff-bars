@@ -266,6 +266,34 @@ public class TrackerTests
     }
 
     [Fact]
+    public void Cc_classification_from_verified_spa_ids()
+    {
+        var db = Db(); if (db is null) return;
+        Assert.True(db.GetById(190)!.HasMez);      // Dazzle
+        Assert.True(db.GetById(190)!.IsCc);
+        Assert.True(db.GetById(182)!.HasCharm);    // Beguile
+        Assert.True(db.GetById(230)!.HasRoot);     // Root
+        Assert.True(db.GetById(229)!.HasFear);     // Fear
+        Assert.False(db.GetById(278)!.IsCc);       // Spirit of Wolf
+        var ccCount = db.All.Count(s => s.IsCc && s.PlayerCastable);
+        Assert.True(ccCount > 20, $"only {ccCount} CC spells classified");
+    }
+
+    [Fact]
+    public void Mez_break_ends_the_mez_timer_early()
+    {
+        var db = Db(); if (db is null) return;
+        var dazzle = db.GetById(190)!;
+        var t = new Tracker(db);
+        t.OnEvent(new CastStartEvent("", "Dazzle", true) { Ts = T0, Observer = "Doofus" });
+        t.OnEvent(new LandOtherEvent("a haunted chest", new[] { dazzle }) { Ts = T0.AddSeconds(2), Observer = "Doofus" });
+        Assert.Single(t.GetSnapshot(T0.AddSeconds(3)).Mobs);
+
+        t.OnEvent(new MezBreakEvent("a haunted chest", "Crammore") { Ts = T0.AddSeconds(20), Observer = "Doofus" });
+        Assert.Empty(t.GetSnapshot(T0.AddSeconds(21)).Mobs);
+    }
+
+    [Fact]
     public void Full_fixture_replay_produces_state_without_errors()
     {
         var db = Db(); if (db is null) return;
