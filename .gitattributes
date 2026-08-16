@@ -1,0 +1,7 @@
+# Normalize line endings: sources are LF in the repo, kill CRLF warnings.
+* text=auto
+*.cs text eol=lf
+*.xaml text eol=lf
+*.md text eol=lf
+*.ps1 text eol=lf
+*.png binary

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5929DEB3-EFC9-476E-BFFA-AA704B978B68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffBars.Core", "src\BuffBars.Core\BuffBars.Core.csproj", "{CAD1EC96-84C1-47E0-9BC3-584711B6AE22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3DFC918F-7608-434D-990A-1A3A856B814B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffBars.Tests", "tests\BuffBars.Tests\BuffBars.Tests.csproj", "{44787649-338A-4A41-A20E-07A11E372ABB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuffBars.App", "src\BuffBars.App\BuffBars.App.csproj", "{5223A5F4-42BD-46FA-AE26-714249A4E62C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CAD1EC96-84C1-47E0-9BC3-584711B6AE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD1EC96-84C1-47E0-9BC3-584711B6AE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD1EC96-84C1-47E0-9BC3-584711B6AE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD1EC96-84C1-47E0-9BC3-584711B6AE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44787649-338A-4A41-A20E-07A11E372ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44787649-338A-4A41-A20E-07A11E372ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44787649-338A-4A41-A20E-07A11E372ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44787649-338A-4A41-A20E-07A11E372ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5223A5F4-42BD-46FA-AE26-714249A4E62C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5223A5F4-42BD-46FA-AE26-714249A4E62C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5223A5F4-42BD-46FA-AE26-714249A4E62C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5223A5F4-42BD-46FA-AE26-714249A4E62C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAD1EC96-84C1-47E0-9BC3-584711B6AE22} = {5929DEB3-EFC9-476E-BFFA-AA704B978B68}
+		{44787649-338A-4A41-A20E-07A11E372ABB} = {3DFC918F-7608-434D-990A-1A3A856B814B}
+		{5223A5F4-42BD-46FA-AE26-714249A4E62C} = {5929DEB3-EFC9-476E-BFFA-AA704B978B68}
+	EndGlobalSection
+EndGlobal

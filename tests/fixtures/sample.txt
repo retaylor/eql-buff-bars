@@ -1,0 +1,236 @@
+[Fri Aug 14 10:00:03 2026] Welcome to EverQuest Legends!
+[Fri Aug 14 10:00:05 2026] You have entered The Plains of Karana.
+[Fri Aug 14 10:00:10 2026] You have joined the group.
+[Fri Aug 14 10:00:12 2026] Healbot has joined the group.
+[Fri Aug 14 10:00:14 2026] Wizzy has joined the group.
+[Fri Aug 14 10:00:16 2026] Bardo has joined the group.
+[Fri Aug 14 10:00:18 2026] Wizzy tells the group, 'ready when you are'
+[Fri Aug 14 10:00:20 2026] Healbot tells the group, 'buffs inc, hold still'
+[Fri Aug 14 10:00:22 2026] You say, 'You have entered The Feerrott.'
+[Fri Aug 14 10:00:24 2026] You activate Quick Buff.
+[Fri Aug 14 10:00:25 2026] You begin casting Spirit of Wolf.
+[Fri Aug 14 10:00:28 2026] You feel the spirit of wolf enter you.
+[Fri Aug 14 10:00:30 2026] You begin casting Spirit of Wolf.
+[Fri Aug 14 10:00:33 2026] Healbot is surrounded by a brief lupine aura.
+[Fri Aug 14 10:00:35 2026] You begin casting Spirit of Wolf.
+[Fri Aug 14 10:00:38 2026] Wizzy is surrounded by a brief lupine aura.
+[Fri Aug 14 10:00:40 2026] Bardo begins casting Alacrity.
+[Fri Aug 14 10:00:43 2026] You feel much faster.
+[Fri Aug 14 10:00:45 2026] Healbot begins casting Chloroplast.
+[Fri Aug 14 10:00:48 2026] You begin to regenerate.
+[Fri Aug 14 10:00:50 2026] Healbot begins casting Regrowth.
+[Fri Aug 14 10:00:54 2026] Healbot begins to regenerate.
+[Fri Aug 14 10:00:56 2026] You begin casting Chloroplast.
+[Fri Aug 14 10:00:59 2026] Your Chloroplast spell did not take hold on Bardo. (Blocked by Regrowth.)
+[Fri Aug 14 10:01:01 2026] Your Worn Totem (Exaltation) feels alive with power.
+[Fri Aug 14 10:01:03 2026] Bardo tells the group, 'no need, I've got Regrowth up already'
+[Fri Aug 14 10:01:09 2026] Wizzy tells the group, 'inc a moss snake and a gnoll pup'
+[Fri Aug 14 10:01:12 2026] You begin casting Walking Sleep.
+[Fri Aug 14 10:01:15 2026] a moss snake yawns.
+[Fri Aug 14 10:01:17 2026] Bardo says, 'don't break it, the snake's asleep'
+[Fri Aug 14 10:01:19 2026] You begin casting Suffocating Sphere.
+[Fri Aug 14 10:01:22 2026] a gnoll pup gasps for breath.
+[Fri Aug 14 10:01:23 2026] A gnoll pup has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:01:24 2026] Tanko slashes a gnoll pup for 14 points of damage.
+[Fri Aug 14 10:01:24 2026] A gnoll pup bites Tanko for 9 points of damage.
+[Fri Aug 14 10:01:25 2026] Tanko tries to slash a gnoll pup, but misses!
+[Fri Aug 14 10:01:25 2026] A gnoll pup tries to bite YOU, but YOU parry!
+[Fri Aug 14 10:01:26 2026] Bardo begins singing Chords of Dissonance.
+[Fri Aug 14 10:01:28 2026] a gnoll pup winces.
+[Fri Aug 14 10:01:29 2026] A gnoll pup has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:01:30 2026] Tanko slashes a gnoll pup for 21 points of damage.
+[Fri Aug 14 10:01:30 2026] A gnoll pup bites Tanko for 12 points of damage.
+[Fri Aug 14 10:01:31 2026] Tanko kicks a gnoll pup for 8 points of damage.
+[Fri Aug 14 10:01:32 2026] A gnoll pup tries to bite YOU, but misses!
+[Fri Aug 14 10:01:33 2026] A gnoll pup has taken 63 damage from your Suffocating Sphere. (Critical)
+[Fri Aug 14 10:01:34 2026] Tanko slashes a gnoll pup for 17 points of damage.
+[Fri Aug 14 10:01:34 2026] A gnoll pup bites Tanko for 11 points of damage.
+[Fri Aug 14 10:01:35 2026] a gnoll pup winces.
+[Fri Aug 14 10:01:36 2026] A gnoll pup has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:01:37 2026] You begin casting Snails Healing.
+[Fri Aug 14 10:01:40 2026] Healbot is healed by the spirit of the snail.
+[Fri Aug 14 10:01:42 2026] You healed Healbot over time for 61 hit points by Snails Healing.
+[Fri Aug 14 10:01:43 2026] Tanko slashes a gnoll pup for 19 points of damage.
+[Fri Aug 14 10:01:43 2026] A gnoll pup bites Tanko for 10 points of damage.
+[Fri Aug 14 10:01:45 2026] A gnoll pup has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:01:46 2026] Tanko bashes a gnoll pup for 6 points of damage.
+[Fri Aug 14 10:01:48 2026] You healed Healbot over time for 37 (61) hit points by Snails Healing.
+[Fri Aug 14 10:01:49 2026] Healbot begins casting Complete Heal.
+[Fri Aug 14 10:01:51 2026] Healbot's Complete Heal spell is interrupted.
+[Fri Aug 14 10:01:52 2026] Healbot tells the group, 'interrupted, get this thing off me'
+[Fri Aug 14 10:01:53 2026] You begin casting Complete Heal.
+[Fri Aug 14 10:01:55 2026] Your Complete Heal spell is interrupted.
+[Fri Aug 14 10:01:56 2026] A gnoll pup bites Tanko for 16 points of damage.
+[Fri Aug 14 10:01:57 2026] You begin casting Greater Healing.
+[Fri Aug 14 10:01:59 2026] Your Greater Healing spell fizzles!
+[Fri Aug 14 10:02:00 2026] You begin casting Greater Healing.
+[Fri Aug 14 10:02:03 2026] You healed Wizzy for 210 hit points by Greater Healing.
+[Fri Aug 14 10:02:04 2026] A gnoll pup has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:02:05 2026] Tanko slashes a gnoll pup for 27 points of damage. (Critical)
+[Fri Aug 14 10:02:06 2026] A gnoll pup has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:02:07 2026] Tanko slashes a gnoll pup for 18 points of damage.
+[Fri Aug 14 10:02:09 2026] You have slain a gnoll pup!
+[Fri Aug 14 10:02:11 2026] Wizzy tells the group, 'pup down, snake still napping'
+[Fri Aug 14 10:02:14 2026] Your Walking Sleep spell has worn off of a moss snake.
+[Fri Aug 14 10:02:16 2026] A moss snake bites Tanko for 7 points of damage.
+[Fri Aug 14 10:02:17 2026] You begin casting Walking Sleep.
+[Fri Aug 14 10:02:19 2026] A moss snake resisted your Walking Sleep!
+[Fri Aug 14 10:02:20 2026] A moss snake bites Tanko for 9 points of damage.
+[Fri Aug 14 10:02:21 2026] You begin casting Walking Sleep.
+[Fri Aug 14 10:02:24 2026] a moss snake yawns.
+[Fri Aug 14 10:02:26 2026] Wizzy begins casting Wisp Explosion.
+[Fri Aug 14 10:02:29 2026] A moss snake has taken 12 damage by Wisp Explosion.
+[Fri Aug 14 10:02:29 2026] a moss snake has been awakened by Wizzy.
+[Fri Aug 14 10:02:30 2026] Bardo tells the group, 'WIZZY. we talked about this'
+[Fri Aug 14 10:02:31 2026] A moss snake bites Wizzy for 13 points of damage.
+[Fri Aug 14 10:02:32 2026] Tanko slashes a moss snake for 22 points of damage.
+[Fri Aug 14 10:02:32 2026] A moss snake has taken 12 damage by Wisp Explosion.
+[Fri Aug 14 10:02:33 2026] Tanko slashes a moss snake for 17 points of damage.
+[Fri Aug 14 10:02:34 2026] A moss snake has been slain by Wizzy!
+[Fri Aug 14 10:02:37 2026] You have gained a level! Welcome to level 46!
+[Fri Aug 14 10:02:38 2026] Healbot tells the group, 'grats!'
+[Fri Aug 14 10:02:39 2026] Wizzy tells the group, 'ding grats'
+[Fri Aug 14 10:02:47 2026] Your pet's Chloroplast spell has worn off.
+[Fri Aug 14 10:02:51 2026] Your speed returns to normal.
+[Fri Aug 14 10:02:54 2026] Bardo begins casting Alacrity.
+[Fri Aug 14 10:02:57 2026] You feel much faster.
+[Fri Aug 14 10:03:02 2026] Healbot tells you, 'oom, medding a tick'
+[Fri Aug 14 10:04:17 2026] Healbot tells the group, 'ok full mana, let's move'
+[Fri Aug 14 10:04:57 2026] Wizzy tells the group, 'push to South Karana'
+[Fri Aug 14 10:05:01 2026] LOADING, PLEASE WAIT...
+[Fri Aug 14 10:05:10 2026] You have entered South Karana.
+[Fri Aug 14 10:05:13 2026] Bardo says, 'anyone else lag on that zone line?'
+[Fri Aug 14 10:05:38 2026] Wizzy tells the group, 'lion first, easy warmup'
+[Fri Aug 14 10:05:40 2026] You begin casting Suffocating Sphere.
+[Fri Aug 14 10:05:43 2026] a plains lion gasps for breath.
+[Fri Aug 14 10:05:44 2026] A plains lion has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:05:45 2026] Tanko slashes a plains lion for 18 points of damage.
+[Fri Aug 14 10:05:45 2026] A plains lion claws Tanko for 12 points of damage.
+[Fri Aug 14 10:05:46 2026] Tanko tries to slash a plains lion, but misses!
+[Fri Aug 14 10:05:46 2026] A plains lion tries to claw YOU, but YOU dodge!
+[Fri Aug 14 10:05:47 2026] Bardo begins singing Chords of Dissonance.
+[Fri Aug 14 10:05:49 2026] a plains lion winces.
+[Fri Aug 14 10:05:50 2026] A plains lion has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:05:51 2026] Tanko slashes a plains lion for 25 points of damage.
+[Fri Aug 14 10:05:51 2026] A plains lion claws Tanko for 15 points of damage.
+[Fri Aug 14 10:05:52 2026] Tanko kicks a plains lion for 11 points of damage.
+[Fri Aug 14 10:05:53 2026] A plains lion has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:05:54 2026] A plains lion has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:05:55 2026] Wizzy begins casting Wisp Explosion.
+[Fri Aug 14 10:05:58 2026] A plains lion has taken 24 damage by Wisp Explosion.
+[Fri Aug 14 10:05:59 2026] Tanko slashes a plains lion for 16 points of damage.
+[Fri Aug 14 10:05:59 2026] A plains lion bites Tanko for 13 points of damage.
+[Fri Aug 14 10:06:00 2026] Tanko tries to kick a plains lion, but misses!
+[Fri Aug 14 10:06:01 2026] A plains lion has taken 63 damage from your Suffocating Sphere. (Critical)
+[Fri Aug 14 10:06:02 2026] Tanko slashes a plains lion for 20 points of damage.
+[Fri Aug 14 10:06:02 2026] A plains lion tries to bite YOU, but misses!
+[Fri Aug 14 10:06:03 2026] Tanko slashes a plains lion for 24 points of damage. (Critical)
+[Fri Aug 14 10:06:04 2026] A plains lion has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:06:06 2026] You have slain a plains lion!
+[Fri Aug 14 10:06:08 2026] Bardo tells the group, 'majestic. anyway'
+[Fri Aug 14 10:06:43 2026] Healbot tells the group, 'skeleton and a guardsman ahead, rat add too'
+[Fri Aug 14 10:06:46 2026] A decaying skeleton begins casting Engulfing Darkness.
+[Fri Aug 14 10:06:49 2026] You are engulfed by darkness.
+[Fri Aug 14 10:06:50 2026] You have taken 33 damage from Engulfing Darkness by a decaying skeleton.
+[Fri Aug 14 10:06:51 2026] Tanko slashes a decaying skeleton for 16 points of damage.
+[Fri Aug 14 10:06:51 2026] A decaying skeleton hits Tanko for 24 points of damage.
+[Fri Aug 14 10:06:52 2026] Wizzy begins casting Suffocating Sphere.
+[Fri Aug 14 10:06:55 2026] a gnoll guardsman gasps for breath.
+[Fri Aug 14 10:06:56 2026] A gnoll guardsman has taken 97 damage from Suffocating Sphere by Wizzy.
+[Fri Aug 14 10:06:57 2026] Bardo begins singing Denon's Disruptive Discord.
+[Fri Aug 14 10:06:59 2026] a gnoll guardsman winces.
+[Fri Aug 14 10:07:00 2026] A gnoll guardsman has taken 18 damage from Denon's Disruptive Discord by Bardo.
+[Fri Aug 14 10:07:01 2026] Tanko slashes a decaying skeleton for 12 points of damage.
+[Fri Aug 14 10:07:01 2026] A decaying skeleton hits Tanko for 31 points of damage.
+[Fri Aug 14 10:07:02 2026] a large rat bites Bardo for 4 points of damage.
+[Fri Aug 14 10:07:03 2026] Wizzy begins casting Wisp Explosion.
+[Fri Aug 14 10:07:06 2026] A large rat has taken 24 damage by Wisp Explosion.
+[Fri Aug 14 10:07:06 2026] A gnoll guardsman has taken 24 damage by Wisp Explosion.
+[Fri Aug 14 10:07:08 2026] You have taken 33 damage from Engulfing Darkness by a decaying skeleton.
+[Fri Aug 14 10:07:09 2026] Healbot begins casting Snails Healing.
+[Fri Aug 14 10:07:12 2026] You being to feel healed by the snail.
+[Fri Aug 14 10:07:14 2026] Healbot healed Tanko over time for 55 hit points by Snails Healing.
+[Fri Aug 14 10:07:15 2026] Tanko slashes a decaying skeleton for 19 points of damage.
+[Fri Aug 14 10:07:15 2026] A decaying skeleton tries to hit YOU, but misses!
+[Fri Aug 14 10:07:16 2026] A gnoll guardsman has taken 97 damage from Suffocating Sphere by Wizzy.
+[Fri Aug 14 10:07:17 2026] a gnoll guardsman winces.
+[Fri Aug 14 10:07:18 2026] Tanko bashes a decaying skeleton for 9 points of damage.
+[Fri Aug 14 10:07:19 2026] A gnoll guardsman slashes Healbot for 34 points of damage.
+[Fri Aug 14 10:07:20 2026] You have taken 33 damage from Engulfing Darkness by a decaying skeleton.
+[Fri Aug 14 10:07:20 2026] Healbot healed Tanko over time for 41 (55) hit points by Snails Healing.
+[Fri Aug 14 10:07:21 2026] A decaying skeleton begins casting Engulfing Darkness.
+[Fri Aug 14 10:07:23 2026] You resist a decaying skeleton's Engulfing Darkness!
+[Fri Aug 14 10:07:24 2026] A gnoll guardsman has taken 118 damage from Suffocating Sphere by Wizzy. (Critical)
+[Fri Aug 14 10:07:25 2026] a large rat bites Bardo for 6 points of damage.
+[Fri Aug 14 10:07:25 2026] A large rat has taken 24 damage by Wisp Explosion.
+[Fri Aug 14 10:07:27 2026] a large rat died.
+[Fri Aug 14 10:07:28 2026] Bardo tells the group, 'rat handled, someone peel the skeleton off Tanko'
+[Fri Aug 14 10:07:29 2026] Tanko slashes a decaying skeleton for 22 points of damage. (Critical)
+[Fri Aug 14 10:07:29 2026] A decaying skeleton hits Tanko for 28 points of damage.
+[Fri Aug 14 10:07:30 2026] A gnoll guardsman has taken 18 damage from Denon's Disruptive Discord by Bardo.
+[Fri Aug 14 10:07:31 2026] You begin casting Walking Sleep.
+[Fri Aug 14 10:07:33 2026] A gnoll guardsman resisted your Walking Sleep!
+[Fri Aug 14 10:07:34 2026] A gnoll guardsman slashes Healbot for 44 points of damage.
+[Fri Aug 14 10:07:34 2026] Healbot begins casting Complete Heal.
+[Fri Aug 14 10:07:36 2026] The darkness fades.
+[Fri Aug 14 10:07:37 2026] A gnoll guardsman slashes Healbot for 51 points of damage.
+[Fri Aug 14 10:07:37 2026] A gnoll guardsman has taken 97 damage from Suffocating Sphere by Wizzy.
+[Fri Aug 14 10:07:38 2026] Healbot has been slain by a gnoll guardsman!
+[Fri Aug 14 10:07:39 2026] Wizzy tells the group, 'oh no. OH NO'
+[Fri Aug 14 10:07:40 2026] A gnoll guardsman has taken 18 damage from Denon's Disruptive Discord by Bardo.
+[Fri Aug 14 10:07:41 2026] A gnoll guardsman has been slain by Wizzy!
+[Fri Aug 14 10:07:43 2026] Tanko slashes a decaying skeleton for 11 points of damage.
+[Fri Aug 14 10:07:43 2026] A decaying skeleton hits Tanko for 39 points of damage.
+[Fri Aug 14 10:07:44 2026] Tanko tries to slash a decaying skeleton, but misses!
+[Fri Aug 14 10:07:44 2026] A decaying skeleton hits Tanko for 41 points of damage.
+[Fri Aug 14 10:07:45 2026] You have been slain by a decaying skeleton!
+[Fri Aug 14 10:07:47 2026] Bardo says, 'this is fine. everything is fine'
+[Fri Aug 14 10:07:51 2026] Bardo has left the group.
+[Fri Aug 14 10:07:54 2026] LOADING, PLEASE WAIT...
+[Fri Aug 14 10:08:01 2026] You have entered The Plains of Karana.
+[Fri Aug 14 10:08:06 2026] Wizzy tells you, 'rez inc, don't loot yet'
+[Fri Aug 14 10:09:06 2026] Healbot has joined the group.
+[Fri Aug 14 10:09:09 2026] Healbot tells the group, 'we never speak of this again'
+[Fri Aug 14 10:09:13 2026] You activate Quick Buff.
+[Fri Aug 14 10:09:14 2026] You begin casting Spirit of Wolf.
+[Fri Aug 14 10:09:17 2026] You feel the spirit of wolf enter you.
+[Fri Aug 14 10:09:19 2026] You begin casting Chloroplast.
+[Fri Aug 14 10:09:22 2026] You begin to regenerate.
+[Fri Aug 14 10:09:25 2026] Bardo has joined the group.
+[Fri Aug 14 10:09:27 2026] Bardo tells the group, 'heard you all died. hilarious. inc'
+[Fri Aug 14 10:09:33 2026] Wizzy begins casting Alacrity.
+[Fri Aug 14 10:09:36 2026] You feel much faster.
+[Fri Aug 14 10:09:41 2026] Healbot tells the group, 'ok. round two. carefully this time'
+[Fri Aug 14 10:10:31 2026] Wizzy tells the group, 'gnoll elder up ahead, focus it down'
+[Fri Aug 14 10:10:34 2026] You begin casting Suffocating Sphere.
+[Fri Aug 14 10:10:37 2026] a gnoll elder gasps for breath.
+[Fri Aug 14 10:10:38 2026] A gnoll elder has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:10:39 2026] Tanko slashes a gnoll elder for 15 points of damage.
+[Fri Aug 14 10:10:39 2026] A gnoll elder hits Tanko for 14 points of damage.
+[Fri Aug 14 10:10:40 2026] Bardo begins singing Chords of Dissonance.
+[Fri Aug 14 10:10:42 2026] a gnoll elder winces.
+[Fri Aug 14 10:10:43 2026] A gnoll elder has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:10:44 2026] Tanko slashes a gnoll elder for 23 points of damage.
+[Fri Aug 14 10:10:44 2026] A gnoll elder hits Tanko for 17 points of damage.
+[Fri Aug 14 10:10:45 2026] Tanko tries to slash a gnoll elder, but misses!
+[Fri Aug 14 10:10:45 2026] A gnoll elder tries to hit YOU, but YOU parry!
+[Fri Aug 14 10:10:46 2026] Wizzy begins casting Wisp Explosion.
+[Fri Aug 14 10:10:49 2026] A gnoll elder has taken 24 damage by Wisp Explosion.
+[Fri Aug 14 10:10:50 2026] A gnoll elder has taken 42 damage from your Suffocating Sphere.
+[Fri Aug 14 10:10:51 2026] Tanko kicks a gnoll elder for 9 points of damage.
+[Fri Aug 14 10:10:52 2026] A gnoll elder has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:10:53 2026] Healbot begins casting Snails Healing.
+[Fri Aug 14 10:10:56 2026] You being to feel healed by the snail.
+[Fri Aug 14 10:10:58 2026] Healbot healed Tanko over time for 55 hit points by Snails Healing.
+[Fri Aug 14 10:10:59 2026] Tanko slashes a gnoll elder for 26 points of damage. (Critical)
+[Fri Aug 14 10:10:59 2026] A gnoll elder hits Tanko for 12 points of damage.
+[Fri Aug 14 10:11:00 2026] A gnoll elder has taken 63 damage from your Suffocating Sphere. (Critical)
+[Fri Aug 14 10:11:01 2026] Tanko slashes a gnoll elder for 14 points of damage.
+[Fri Aug 14 10:11:01 2026] A gnoll elder tries to hit YOU, but misses!
+[Fri Aug 14 10:11:02 2026] A gnoll elder has taken 5 damage from Chords of Dissonance by Bardo.
+[Fri Aug 14 10:11:03 2026] Tanko slashes a gnoll elder for 21 points of damage.
+[Fri Aug 14 10:11:05 2026] You have slain a gnoll elder!
+[Fri Aug 14 10:11:07 2026] Your Suffocating Sphere spell has worn off of a gnoll elder.
+[Fri Aug 14 10:11:09 2026] Healbot tells the group, 'clean. beautiful. that's the standard now'
+[Fri Aug 14 10:11:12 2026] Bardo says, 'I'm putting `flawless victory` in my bio'
+[Fri Aug 14 10:11:17 2026] Wizzy tells the group, 'camp here, pulling the next one in 30'

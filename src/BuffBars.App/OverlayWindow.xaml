@@ -1,0 +1,66 @@
+<Window x:Class="BuffBars.App.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" AllowsTransparency="True" Background="#01000000"
+        ShowActivated="False" ShowInTaskbar="False" ResizeMode="NoResize"
+        UseLayoutRounding="True" SnapsToDevicePixels="True" Topmost="True"
+        Title="EqlBuffBars">
+    <Border x:Name="RootBorder" CornerRadius="5" BorderThickness="1"
+            BorderBrush="#2E3440" Background="#E014161B">
+        <DockPanel Margin="0">
+            <Border DockPanel.Dock="Top" Background="#232833" CornerRadius="4,4,0,0"
+                    BorderThickness="0,0,0,1" BorderBrush="#C9A86A" Padding="9,4,9,4">
+                <DockPanel>
+                    <TextBlock x:Name="TitleText" Text="Buffs" Foreground="#E8E2D4"
+                               FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"/>
+                    <StackPanel x:Name="EditButtons" DockPanel.Dock="Right"
+                                HorizontalAlignment="Right" Orientation="Horizontal"
+                                Visibility="Collapsed">
+                        <Button x:Name="SaveButton" Content="Save" Margin="0,0,6,0" Padding="10,1"
+                                Click="OnSaveClick"/>
+                        <Button x:Name="CancelButton" Content="Cancel" Padding="10,1"
+                                Click="OnCancelClick"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="6,4,6,6">
+                <ItemsControl x:Name="Panels">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,3,0,3">
+                                <TextBlock Text="{Binding Display}" Foreground="#C9A86A"
+                                           FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                           Margin="1,0,0,2"/>
+                                <ItemsControl ItemsSource="{Binding Rows}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="2,1,2,1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="4"/>
+                                                </Grid.RowDefinitions>
+                                                <DockPanel Grid.Row="0">
+                                                    <TextBlock Text="{Binding TimeText}" DockPanel.Dock="Right"
+                                                               Foreground="{Binding TimeBrush}" FontFamily="Consolas"
+                                                               FontSize="11.5" Margin="8,0,0,0"/>
+                                                    <TextBlock Text="{Binding Label}" Foreground="{Binding LabelBrush}"
+                                                               FontFamily="Segoe UI" FontSize="11.5"
+                                                               TextTrimming="CharacterEllipsis"/>
+                                                </DockPanel>
+                                                <Border Grid.Row="1" Background="#26000000" CornerRadius="2" Margin="0,1,0,0">
+                                                    <Border HorizontalAlignment="Left" CornerRadius="2"
+                                                            Background="{Binding BarBrush}"
+                                                            Width="{Binding BarWidth}" Height="3"/>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+    </Border>
+</Window>
